@@ -5,7 +5,6 @@ import model.Product;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class Cart {
     private List<Product> products;
@@ -19,7 +18,7 @@ public class Cart {
     public void addProductToCart(Product product, int quantity) {
         productManager.findById(product.getId()).ifPresentOrElse(foundProduct -> {
 
-            if (foundProduct.getquantityAvailable() < quantity) {
+            if (foundProduct.getQuantityAvailable() < quantity) {
                 System.out.println("There is not enough products to add to cart");
                 return;
             }

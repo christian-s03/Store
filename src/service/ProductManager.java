@@ -15,7 +15,7 @@ public class ProductManager {
     }
 
     public void addProduct(Product product) throws NotAvailableException {
-        if (product.getquantityAvailable() <= 0) {
+        if (product.getQuantityAvailable() <= 0) {
             throw new NotAvailableException("Product not available");
         }
         products.add(product);
@@ -31,9 +31,9 @@ public class ProductManager {
         Optional<Product> optionalProduct = findById(id);
         if (optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
-            int currentQuantity = product.getquantityAvailable();
+            int currentQuantity = product.getQuantityAvailable();
             if (currentQuantity >= quantity) {
-                product.setquantityAvailable(currentQuantity - quantity);
+                product.setQuantityAvailable(currentQuantity - quantity);
             } else {
                 System.out.println("Product enough not available");
             }
@@ -51,7 +51,7 @@ public class ProductManager {
                 System.out.println("ID: " + product.getId()
                         + ", Name: " + product.getProductName()
                         + ", Price: " + product.getPrice()
-                        + ", available quantity: " + product.getquantityAvailable());
+                        + ", available quantity: " + product.getQuantityAvailable());
             }
         }
     }

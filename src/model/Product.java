@@ -40,11 +40,11 @@ public class Product {
         this.price = price;
     }
 
-    public int getquantityAvailable() {
+    public int getQuantityAvailable() {
         return quantityAvailable;
     }
 
-    public void setquantityAvailable(int quantityAvailable) {
+    public void setQuantityAvailable(int quantityAvailable) {
         this.quantityAvailable = quantityAvailable;
     }
 
