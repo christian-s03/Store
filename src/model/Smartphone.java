@@ -3,13 +3,14 @@ package model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Smartphone extends Product {
     private Color color;
     private int batteryCapacity;
     private List<String> accessories;
 
-    public Smartphone(int id, String name, BigDecimal price, int quantityAvailable, Color color, int batteryCapacity) {
+    public Smartphone(UUID id, String name, BigDecimal price, int quantityAvailable, Color color, int batteryCapacity) {
         super(id, name, price, quantityAvailable);
         this.color = color;
         this.batteryCapacity = batteryCapacity;
