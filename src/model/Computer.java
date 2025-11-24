@@ -1,6 +1,7 @@
 package model;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class Computer extends Product {
     private String processor;
@@ -8,7 +9,7 @@ public class Computer extends Product {
     private String ssd;
     private String charger;
 
-    public Computer(int id, String productName, BigDecimal price, int quantityAvailable,
+    public Computer(UUID id, String productName, BigDecimal price, int quantityAvailable,
                     String processor, String ram, String ssdDriveCapacity, String charger) {
         super(id, productName, price, quantityAvailable);
         this.processor = processor;

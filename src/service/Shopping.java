@@ -6,10 +6,7 @@ import model.*;
 
 import java.math.BigDecimal;
 import java.time.ZoneId;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Shopping implements CommandLine {
     private ProductManager productManager;
@@ -17,6 +14,7 @@ public class Shopping implements CommandLine {
     private OrderProcessor orderProcessor;
     private Scanner scanner;
     private PcComponents pcComponents;
+    private List<Product> products;
 
     public Shopping(ProductManager productManager, Cart cart, OrderProcessor orderProcessor,
                     Scanner scanner, PcComponents pcComponents) {
@@ -60,35 +58,47 @@ public class Shopping implements CommandLine {
         productManager.displayProducts();
     }
 
-    @Override
     public void addProductToCart() {
-        System.out.println("Please enter the product ID that you want to add to cart: ");
-        int productID = scanner.nextInt();
-        scanner.nextLine();
-        Optional<Product> optionalProduct = productManager.findById(productID);
+
+        System.out.println("Please enter the product ID (UUID) that you want to add to cart: ");
+        UUID productId = UUID.fromString(scanner.nextLine());
+
+        Optional<Product> optionalProduct = productManager.findById(productId);
+
         if (optionalProduct.isPresent()) {
-            Product productToAdd = optionalProduct.get();
-            try {
-                cart.addProductToCart(productToAdd, 1);
-                System.out.println("Product added to cart.");
-            } catch (NotAvailableException e) {
-                System.out.println("Product not available");
+            Product foundProduct = optionalProduct.get();
+
+            System.out.println("How many products you want to add to cart: ");
+            int quantity = scanner.nextInt();
+            scanner.nextLine();
+
+            if (foundProduct.getQuantityAvailable() < quantity) {
+                System.out.println("There is not enough products to add to cart");
+                return;
             }
+            for (int i = 0; i < quantity; i++) {
+                products.add(foundProduct);
+            }
+            productManager.removeProduct(foundProduct.getId(), quantity);
+            System.out.println("Product added to cart");
         } else {
-            System.out.println("Product not available");
+            System.out.println("Product ID not found");
         }
     }
 
     @Override
     public void removeProductFromCart() {
-        System.out.println("Please enter the product ID that you want to remove from cart: ");
-        int productIdToRemove = scanner.nextInt();
-        scanner.nextLine();
+        System.out.println("Please enter the product ID (UUID) that you want to remove from cart: ");
+        UUID productIdToRemove = UUID.fromString(scanner.nextLine());
         Optional<Product> optionalProductToRemove = productManager.findById(productIdToRemove);
+
         if (optionalProductToRemove.isPresent()) {
             Product productToRemove = optionalProductToRemove.get();
+
             System.out.println("How many you want to remove from cart: ");
             int quantityToRemove = scanner.nextInt();
+            scanner.nextLine();
+
             cart.removeProductFromCart(productToRemove, quantityToRemove);
         } else {
             System.out.println("Invalid product ID");
@@ -110,7 +120,7 @@ public class Shopping implements CommandLine {
         int command;
         do {
             System.out.println("Set up your new Pc. Starting price is 2000.00 zł + components");
-            Computer computer = new Computer(1, "Pc", new BigDecimal(0.00), 1,
+            Computer computer = new Computer(UUID.randomUUID(), "Pc", new BigDecimal(0.00), 10,
                     null, null, null, null);
             BigDecimal totalCost = BigDecimal.valueOf(2000.00);
 
@@ -162,7 +172,7 @@ public class Shopping implements CommandLine {
     @Override
     public void setUpPhone() throws NotAvailableException {
         int command = 0;
-        Smartphone smartphone = new Smartphone(99, "Phone", BigDecimal.ZERO,
+        Smartphone smartphone = new Smartphone(UUID.randomUUID(), "Phone", BigDecimal.ZERO,
                 1, null, 0);
         BigDecimal totalCost = BigDecimal.valueOf(1000.00);
         System.out.println("Set up your phone. Starting price is " + totalCost);

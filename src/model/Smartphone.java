@@ -3,6 +3,7 @@ package model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Smartphone extends Product {
     public enum Color {
@@ -18,9 +19,11 @@ public class Smartphone extends Product {
     private String color;
     private int batteryCapacity;
     private List<String> accessories;
-
-    public Smartphone(int id, String name, BigDecimal price, int quantityAvailable, String color, int batteryCapacity) {
+    private UUID id;
+    
+    public Smartphone(UUID id, String name, BigDecimal price, int quantityAvailable, String color, int batteryCapacity) {
         super(id, name, price, quantityAvailable);
+        this.id = UUID.randomUUID();
         this.color = color;
         this.batteryCapacity = batteryCapacity;
         this.accessories = new ArrayList<>();
