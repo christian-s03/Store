@@ -5,22 +5,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Smartphone extends Product {
-    private Color color;
+    public enum Color {
+        BLACK,
+        WHITE,
+        SILVER,
+        GOLD,
+        RED,
+        PINK,
+        BLUE
+    }
+
+    private String color;
     private int batteryCapacity;
     private List<String> accessories;
 
-    public Smartphone(int id, String name, BigDecimal price, int quantityAvailable, Color color, int batteryCapacity) {
+    public Smartphone(int id, String name, BigDecimal price, int quantityAvailable, String color, int batteryCapacity) {
         super(id, name, price, quantityAvailable);
         this.color = color;
         this.batteryCapacity = batteryCapacity;
         this.accessories = new ArrayList<>();
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
@@ -38,6 +48,14 @@ public class Smartphone extends Product {
 
     public void addAccessory(String accessory) {
         accessories.add(accessory);
+    }
+
+    public static void displayAvailableColors() {
+        System.out.println("Available colors:");
+        int i = 1;
+        for (Color color : Color.values()) {
+            System.out.println(i++ + ". " + color);
+        }
     }
 
     @Override

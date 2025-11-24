@@ -1,5 +1,6 @@
 package service;
 
+import Exceptions.NotAvailableException;
 import model.Product;
 
 import java.math.BigDecimal;
@@ -15,7 +16,7 @@ public class Cart {
         this.productManager = productManager;
     }
 
-    public void addProductToCart(Product product, int quantity) {
+    public void addProductToCart(Product product, int quantity) throws NotAvailableException {
         productManager.findById(product.getId()).ifPresentOrElse(foundProduct -> {
 
             if (foundProduct.getQuantityAvailable() < quantity) {
