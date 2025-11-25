@@ -5,38 +5,69 @@ import model.Order;
 import model.Product;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class OrderProcessor implements Runnable {
-    public Order order;
+public class OrderProcessor {
+    private final ExecutorService EXECUTOR;
 
     public OrderProcessor() {
+        this.EXECUTOR = Executors.newFixedThreadPool(100);
     }
 
-    @Override
-    public void run() {
-        List<Product> products = order.getProducts();
-        BigDecimal total = order.getTotalAmount();
-        Customer customer = order.getCustomer();
-
-        System.out.println("Processing your order...");
-        System.out.println("Completed order for: " + customer.getCustomerName());
-        System.out.println("Customer's e-mail: " + customer.getCustomerEmail());
-        System.out.println("Total amount: " + total.setScale(2) + " zł ");
-
+    public void processOrder(Order order) {
+        EXECUTOR.submit(new OrderProcessingTask(order));
     }
 
-    private void generateInvoice(Order order, BigDecimal total) {
-        System.out.println(" === Invoice === ");
-        System.out.println("Invoice ID: " + order.getOrderId());
-        System.out.println("Invoice Date: " + order.getOrderTime());
-        System.out.println("Customer Name: " + order.getCustomer());
-        System.out.println("Products: ");
-        List<Product> products = order.getProducts();
-        for (Product product : products) {
-            System.out.println("- " + product.getProductName() + " = " + product.getPrice().setScale(2) + " zł ");
+    private static class OrderProcessingTask implements Runnable {
+
+        private final Order order;
+
+        public OrderProcessingTask(Order order) {
+            this.order = order;
         }
-        System.out.println("Total = " + total.setScale(2) + " zł ");
+
+        @Override
+        public void run() {
+            System.out.println("\n==============================================");
+            System.out.println("Invoice: "
+                    + Thread.currentThread().getName());
+            System.out.println("==============================================");
+
+            Customer customer = order.getCustomer();
+            List<Product> products = order.getProducts();
+            BigDecimal totalAmount = order.getTotalAmount();
+
+            System.out.println("Customer order: " + customer.getCustomerName());
+            System.out.println("Customer's email: " + customer.getCustomerEmail());
+            System.out.println("Number of products: " + products.size());
+            System.out.println("Total amount: " + totalAmount + " zł");
+
+            generateInvoice(order, totalAmount);
+
+            OrderSaveToTxt.saveOrdersToTxtFile(Collections.singletonList(order));
+
+            System.out.println("Order ID " + order.getOrderId() + " completed!");
+            System.out.println("==============================================\n");
+        }
+
+        private void generateInvoice(Order order, BigDecimal totalAmount) {
+            System.out.println("\n----- Invoice -----");
+            System.out.println("Order ID: " + order.getOrderId());
+            System.out.println("Date: " + ZonedDateTime.now());
+            System.out.println("Customer: " + order.getCustomer());
+            System.out.println("Produkty:");
+
+            for (Product product : order.getProducts()) {
+                System.out.println("- " + product.getProductName() + " | Price: "
+                        + product.getPrice().setScale(2) + " zł");
+            }
+
+            System.out.println("Total: " + totalAmount.setScale(2) + " zł");
+            System.out.println("----- Invoice ended -----\n");
+        }
     }
 }
-

@@ -50,16 +50,23 @@ public class Product {
     }
 
     public void decreaseQuantityProduct(int quantity) {
-        if (quantity > 0) {
+        if (quantity < 0) {
             throw new IllegalArgumentException("The number of products to be reduced cannot be negative");
         }
-        this.quantityAvailable -= quantityAvailable;
+        if (quantity > quantityAvailable) {
+            throw new IllegalArgumentException("Not enough items in stock");
+        }
+        this.quantityAvailable -= quantity;
     }
 
     public void increaseQuantityProduct(int quantity) {
-        if (quantity > 0) {
-            throw new IllegalArgumentException("The number of products to be increased cannot be negative");
+        if (quantity < 0) {
+            throw new IllegalArgumentException("The number of products to be reduced cannot be negative");
         }
+        if (quantity > quantityAvailable) {
+            throw new IllegalArgumentException("Not enough items in stock");
+        }
+        this.quantityAvailable -= quantity;
     }
 
     @Override
