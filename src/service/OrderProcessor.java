@@ -59,7 +59,7 @@ public class OrderProcessor {
             System.out.println("Order ID: " + order.getOrderId());
             System.out.println("Date: " + ZonedDateTime.now());
             System.out.println("Customer: " + order.getCustomer());
-            System.out.println("Produkty:");
+            System.out.println("Products: :");
 
             for (Product product : order.getProducts()) {
                 System.out.println("- " + product.getProductName() + " | Price: "

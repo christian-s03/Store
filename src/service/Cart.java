@@ -4,6 +4,7 @@ import Exceptions.NotAvailableException;
 import model.Product;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,10 +58,34 @@ public class Cart {
     }
 
     public BigDecimal totalCartPrice() {
-        return products.stream()
+        DiscountCalculator discountCalculator = new DiscountCalculator();
+
+        BigDecimal originalTotal = products.stream()
                 .map(Product::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal totalPrice = originalTotal;
+
+        BigDecimal priceAfterAmountDiscount = discountCalculator.calculatePriceWithAmountDiscount(totalPrice);
+        boolean amountDiscountApplied = priceAfterAmountDiscount.compareTo(totalPrice) < 0;
+        if (amountDiscountApplied) {
+            totalPrice = priceAfterAmountDiscount;
+        }
+
+        LocalDateTime now = LocalDateTime.now();
+        BigDecimal priceAfterTimeDiscount = discountCalculator.calculatePriceWithTimeDiscount(totalPrice, now);
+        boolean timeDiscountApplied = priceAfterTimeDiscount.compareTo(totalPrice) < 0;
+        if (timeDiscountApplied) {
+            totalPrice = priceAfterTimeDiscount;
+        }
+
+        System.out.println("Rabat kwotowy zastosowany: " + amountDiscountApplied);
+        System.out.println("Rabat czasowy zastosowany: " + timeDiscountApplied);
+        System.out.println("Cena po rabatach: " + totalPrice);
+
+        return totalPrice;
     }
+
 
     public void viewCartProducts() {
         if (products.isEmpty()) {
