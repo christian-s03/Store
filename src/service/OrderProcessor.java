@@ -5,7 +5,7 @@ import model.Order;
 import model.Product;
 
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -13,9 +13,11 @@ import java.util.concurrent.Executors;
 
 public class OrderProcessor {
     private final ExecutorService EXECUTOR;
+    private static final DateTimeFormatter FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm z");
 
     public OrderProcessor() {
-        this.EXECUTOR = Executors.newFixedThreadPool(100);
+        this.EXECUTOR = Executors.newFixedThreadPool(10);
     }
 
     public void processOrder(Order order) {
@@ -23,7 +25,6 @@ public class OrderProcessor {
     }
 
     private static class OrderProcessingTask implements Runnable {
-
         private final Order order;
 
         public OrderProcessingTask(Order order) {
@@ -56,8 +57,9 @@ public class OrderProcessor {
 
         private void generateInvoice(Order order, BigDecimal totalAmount) {
             System.out.println("\n----- Invoice -----");
+            String formattedDate = order.getOrderDateTime().format(FORMATTER);
             System.out.println("Order ID: " + order.getOrderId());
-            System.out.println("Date: " + ZonedDateTime.now());
+            System.out.println("Date: " + formattedDate);
             System.out.println("Customer: " + order.getCustomer());
             System.out.println("Products: :");
 

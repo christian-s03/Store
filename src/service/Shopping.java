@@ -264,7 +264,7 @@ public class Shopping implements CommandLine {
         BigDecimal totalAmount = cart.totalCartPrice();
         int orderId = generateOrderId();
         ZoneId orderTime = ZoneId.systemDefault();
-        Order order = new Order(orderId, customer, cartItems, totalAmount, orderTime);
+        Order order = new Order(orderId, customer, cartItems, totalAmount);
         for (Product product : cartItems) {
             product.decreaseQuantityProduct(1);
         }

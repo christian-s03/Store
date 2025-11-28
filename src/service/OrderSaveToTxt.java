@@ -11,7 +11,7 @@ public class OrderSaveToTxt {
     private static final String TXT_FILE_PATH = "src/orders.txt";
 
     public static void saveOrdersToTxtFile(List<Order> orders) {
-        try (FileWriter writer = new FileWriter(TXT_FILE_PATH)) {
+        try (FileWriter writer = new FileWriter(TXT_FILE_PATH, true)) {
             String ordersText = orders.stream()
                     .map(OrderSaveToTxt::formatOrder)
                     .collect(Collectors.joining("\n"));
@@ -29,7 +29,7 @@ public class OrderSaveToTxt {
         sb.append("Products: ").append(order.getProducts()).append("\n");
         sb.append("Order amount: ").append(order.getTotalAmount()).append("\n");
         sb.append("Customer: ").append(order.getCustomer().getCustomerName()).append("\n");
-        sb.append("Date of order: ").append(order.getOrderTime()).append("\n");
+        sb.append("Date of order: ").append(order.getOrderDateTime()).append("\n");
         sb.append("----\n");
         return sb.toString();
     }
