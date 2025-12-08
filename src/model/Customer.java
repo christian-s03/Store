@@ -36,7 +36,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "model.Customer's name" + customerName +
-                "\nmodel.Customer's email" + customerEmail;
+        return "Customer's name: " + customerName +
+                "\nCustomer's email: " + customerEmail;
     }
 }

@@ -61,12 +61,12 @@ public class Product {
 
     public void increaseQuantityProduct(int quantity) {
         if (quantity < 0) {
-            throw new IllegalArgumentException("The number of products to be reduced cannot be negative");
+            throw new IllegalArgumentException("The number of products to be increased cannot be negative");
         }
         if (quantity > quantityAvailable) {
             throw new IllegalArgumentException("Not enough items in stock");
         }
-        this.quantityAvailable -= quantity;
+        this.quantityAvailable += quantity;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "model.Product{" +
+        return "Product{" +
                 "Id=" + id +
                 ", Product name ='" + productName +
                 ", price=" + price +

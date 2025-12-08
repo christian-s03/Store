@@ -1,6 +1,18 @@
-Order ID: 4164
-Products: [Computer{id=228d6c45-c793-4f7d-9b0c-de8914ab9e29, Product name='Pc, procesor='Intel Core i7, memory ram=Patriot 64 GB, SSD=512GB, charger=850W}, Computer{id=bd27d671-f853-4e84-8683-2cb90f17e027, Product name='Pc, procesor='Intel Core i5, memory ram=Kingston 16 GB, SSD=256GB, charger=650W}]
-Order amount: 9233.93
+Order ID: 3258
+Products: [Computer{id=4c869cee-b381-47d4-a3e1-bf47ab10ba31, Product name='Pc, procesor='Intel Core i5, memory ram=Kingston 16 GB, SSD=1TB, charger=650W}]
+Order amount: 4544.96
+Customer: asdasd
+Date of order: 2025-11-28T17:09:39.718253300+01:00[Europe/Warsaw]
+----
+Order ID: 1980
+Products: [Computer{id=e3e54f72-04bc-4b88-b155-4a0968669298, Product name='Pc, procesor='AMD Ryzen 5, memory ram=Kingston 16 GB, SSD=256GB, charger=850W}, Computer{id=f72b27e1-f02f-45c9-b25b-52d2a2246c80, Product name='Pc, procesor='Intel Core i7, memory ram=Patriot 32 GB, SSD=1TB, charger=650W}]
+Order amount: 8211.54
 Customer: Hubert
-Date of order: 2025-11-25T16:25:27.602561400+01:00[Europe/Warsaw]
+Date of order: 2025-11-28T17:11:57.544349400+01:00[Europe/Warsaw]
+----
+Order ID: 938
+Products: [Computer{id=78c3af8d-5d5c-458a-a36c-0c49d51ea7a4, Product name='Pc, procesor='Intel Core i7, memory ram=Patriot 32 GB, SSD=1TB, charger=850W}]
+Order amount: 4706.96
+Customer: Adam
+Date of order: 2025-11-28T17:13:14.823462500+01:00[Europe/Warsaw]
 ----

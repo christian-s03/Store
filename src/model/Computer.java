@@ -10,7 +10,7 @@ public class Computer extends Product {
     private String charger;
 
     public Computer(UUID id, String productName, BigDecimal price, int quantityAvailable,
-                    String processor, String ram, String ssdDriveCapacity, String charger) {
+                    String processor, String ram, String ssd, String charger) {
         super(id, productName, price, quantityAvailable);
         this.processor = processor;
         this.ram = ram;

@@ -10,15 +10,15 @@ public class Order {
     private Customer customer;
     private List<Product> products;
     private BigDecimal totalAmount;
-    private ZonedDateTime orderTime;
+    private ZonedDateTime orderDateTime;
 
     public Order(int orderId, Customer customerName, List<Product> products,
-                 BigDecimal totalAmount, ZoneId orderTime) {
+                 BigDecimal totalAmount) {
         this.orderId = orderId;
         this.customer = customerName;
         this.products = products;
         this.totalAmount = totalAmount;
-        this.orderTime = ZonedDateTime.now(orderTime);
+        this.orderDateTime = ZonedDateTime.now(ZoneId.of("Europe/Warsaw"));
     }
 
     public int getOrderId() {
@@ -45,12 +45,8 @@ public class Order {
         return totalAmount;
     }
 
-    public void setOrderTime(ZonedDateTime orderTime) {
-        this.orderTime = orderTime;
-    }
-
-    public ZonedDateTime getOrderTime() {
-        return orderTime;
+    public ZonedDateTime getOrderDateTime() {
+        return orderDateTime;
     }
 
     public void printOrderSummary() {
