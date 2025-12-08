@@ -2,25 +2,26 @@ package model;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Product {
-    private int id;
-    private String productName;
-    private BigDecimal price;
-    private int quantityAvailable;
+    protected UUID id;
+    protected String productName;
+    protected BigDecimal price;
+    protected int quantityAvailable;
 
-    public Product(int id, String productName, BigDecimal price, int quantityAvailable) {
+    public Product(UUID id, String productName, BigDecimal price, int quantityAvailable) {
         this.id = id;
         this.productName = productName;
         this.price = price;
         this.quantityAvailable = quantityAvailable;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

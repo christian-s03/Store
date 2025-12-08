@@ -1,15 +1,16 @@
 package model;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class Computer extends Product {
     private String processor;
-    private int ram;
-    private int ssd;
-    private int charger;
+    private String ram;
+    private String ssd;
+    private String charger;
 
-    public Computer(int id, String productName, BigDecimal price, int quantityAvailable,
-                    String processor, int ram, int ssdDriveCapacity, int charger) {
+    public Computer(UUID id, String productName, BigDecimal price, int quantityAvailable,
+                    String processor, String ram, String ssdDriveCapacity, String charger) {
         super(id, productName, price, quantityAvailable);
         this.processor = processor;
         this.ram = ram;
@@ -21,15 +22,15 @@ public class Computer extends Product {
         this.processor = processor;
     }
 
-    public void setRam(int ram) {
+    public void setRam(String ram) {
         this.ram = ram;
     }
 
-    public void setSsd(int ssd) {
+    public void setSsd(String ssd) {
         this.ssd = ssd;
     }
 
-    public void setCharger(int charger) {
+    public void setCharger(String charger) {
         this.charger = charger;
     }
     @Override
@@ -38,9 +39,9 @@ public class Computer extends Product {
                 "id=" + getId() +
                 ", Product name='" + getProductName() +
                 ", procesor='" + processor +
-                ", memory ram=" + ram + " GB" +
-                ", SSD=" + ssd + " GB" +
-                ", charger=" + charger + " W" +
+                ", memory ram=" + ram +
+                ", SSD=" + ssd +
+                ", charger=" + charger +
                 '}';
     }
 }

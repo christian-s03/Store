@@ -1,10 +1,12 @@
 package service;
 
+import Exceptions.NotAvailableException;
 import model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class ProductManager {
 
@@ -21,13 +23,13 @@ public class ProductManager {
         products.add(product);
     }
 
-    public Optional<Product> findById(long id) {
+    public Optional<Product> findById(UUID id) {
         return products.stream()
                 .filter(product -> product.getId() == id)
                 .findFirst();
     }
 
-    public void removeProduct(int id, int quantity) {
+    public void removeProduct(UUID id, int quantity) {
         Optional<Product> optionalProduct = findById(id);
         if (optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
