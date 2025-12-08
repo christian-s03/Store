@@ -15,7 +15,7 @@ public class Order {
     public Order(int orderId, Customer customerName, List<Product> products,
                  BigDecimal totalAmount, ZoneId orderTime) {
         this.orderId = orderId;
-        this.customer = customer;
+        this.customer = customerName;
         this.products = products;
         this.totalAmount = totalAmount;
         this.orderTime = ZonedDateTime.now(orderTime);

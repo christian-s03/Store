@@ -1,0 +1,6 @@
+Order ID: 4164
+Products: [Computer{id=228d6c45-c793-4f7d-9b0c-de8914ab9e29, Product name='Pc, procesor='Intel Core i7, memory ram=Patriot 64 GB, SSD=512GB, charger=850W}, Computer{id=bd27d671-f853-4e84-8683-2cb90f17e027, Product name='Pc, procesor='Intel Core i5, memory ram=Kingston 16 GB, SSD=256GB, charger=650W}]
+Order amount: 9233.93
+Customer: Hubert
+Date of order: 2025-11-25T16:25:27.602561400+01:00[Europe/Warsaw]
+----

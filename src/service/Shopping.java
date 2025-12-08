@@ -359,6 +359,7 @@ public class Shopping implements CommandLine {
             product.decreaseQuantityProduct(1);
         }
         System.out.println("Order has been placed. Thank you!");
+        orderProcessor.processOrder(order);
     }
 
     private int generateOrderId() {
