@@ -79,9 +79,9 @@ public class Cart {
             totalPrice = priceAfterTimeDiscount;
         }
 
-        System.out.println("Rabat kwotowy zastosowany: " + amountDiscountApplied);
-        System.out.println("Rabat czasowy zastosowany: " + timeDiscountApplied);
-        System.out.println("Cena po rabatach: " + totalPrice);
+        System.out.println("Price discount: " + amountDiscountApplied);
+        System.out.println("Time discount: " + timeDiscountApplied);
+        System.out.println("Price after discount: " + totalPrice);
 
         return totalPrice;
     }
