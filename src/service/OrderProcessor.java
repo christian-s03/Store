@@ -40,34 +40,30 @@ public class OrderProcessor {
             Customer customer = order.getCustomer();
             List<Product> products = order.getProducts();
             BigDecimal totalAmount = order.getTotalAmount();
-
             System.out.println("Customer order: " + customer.getCustomerName());
             System.out.println("Customer's email: " + customer.getCustomerEmail());
             System.out.println("Number of products: " + products.size());
             System.out.println("Total amount: " + totalAmount + " zł");
-
             generateInvoice(order, totalAmount);
-
             OrderSaveToTxt.saveOrdersToTxtFile(Collections.singletonList(order));
-
             System.out.println("Order ID " + order.getOrderId() + " completed!");
             System.out.println("==============================================\n");
         }
 
         private void generateInvoice(Order order, BigDecimal totalAmount) {
-            System.out.println("\n----- Invoice -----");
+            System.out.println("----- Invoice -----");
             System.out.println("Order ID: " + order.getOrderId());
             System.out.println("Date: " + ZonedDateTime.now());
             System.out.println("Customer: " + order.getCustomer());
-            System.out.println("Produkty:");
+            System.out.println("Product:");
 
-            for (Product product : order.getProducts()) {
-                System.out.println("- " + product.getProductName() + " | Price: "
-                        + product.getPrice().setScale(2) + " zł");
-            }
-
+            order.getProducts().stream()
+                    .forEach(product -> System.out.println(
+                            " - " + product.getProductName()
+                                    + " | Price: " + product.getPrice().setScale(2) + " zł"
+                    ));
             System.out.println("Total: " + totalAmount.setScale(2) + " zł");
-            System.out.println("----- Invoice ended -----\n");
+            System.out.println("----- Invoice ended -----");
         }
     }
 }
