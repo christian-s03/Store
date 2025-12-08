@@ -6,29 +6,37 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class DiscountTest {
+
     public static void main(String[] args) {
-        DiscountCalculator calculator = new DiscountCalculator();
+        testAmountDiscount();
+        testTimeDiscount();
+    }
 
-        BigDecimal price1 = new BigDecimal(12000);
-        BigDecimal priceAfterAmount1 = calculator.calculatePriceWithAmountDiscount(price1);
-        System.out.println("Starting price: " + price1 + ", after amount discount: " + priceAfterAmount1);
-
+    private static void testAmountDiscount() {
+        System.out.println("=== testAmountDiscount ===");
+        DiscountCalculator discountCalculator = new DiscountCalculator();
+        BigDecimal price1 = new BigDecimal(20000);
+        BigDecimal discounted1 = discountCalculator.calculatePriceWithAmountDiscount(price1);
+        System.out.println("Original: " + price1 + " | Expected 20% discount: " + discounted1);
         BigDecimal price2 = new BigDecimal(7000);
-        BigDecimal priceAfterAmount2 = calculator.calculatePriceWithAmountDiscount(price2);
-        System.out.println("Starting price: " + price2 + ", after amount discount: " + priceAfterAmount2);
+        BigDecimal discounted2 = discountCalculator.calculatePriceWithAmountDiscount(price2);
+        System.out.println("Original: " + price2 + " | Expected 10% discount: " + discounted2);
+        BigDecimal price3 = new BigDecimal(3000);
+        BigDecimal discounted3 = discountCalculator.calculatePriceWithAmountDiscount(price3);
+        System.out.println("Original: " + price3 + " | Expected no discount: " + discounted3);
+        System.out.println();
+    }
 
-        BigDecimal price3 = new BigDecimal(4000);
-        BigDecimal priceAfterAmount3 = calculator.calculatePriceWithAmountDiscount(price3);
-        System.out.println("Starting price: " + price3 + ", after amount discount: " + priceAfterAmount3);
-
-        LocalDateTime morning = LocalDateTime.of(2025, 11, 27, 10, 0);
-        BigDecimal price4 = new BigDecimal(5000);
-        BigDecimal priceAfterTime1 = calculator.calculatePriceWithTimeDiscount(price4, morning);
-        System.out.println("Starting price: " + price4 + ", after time discount (10:00): " + priceAfterTime1);
-
-        LocalDateTime afternoon = LocalDateTime.of(2025, 11, 27, 16, 0);
-        BigDecimal price5 = new BigDecimal(5000);
-        BigDecimal priceAfterTime2 = calculator.calculatePriceWithTimeDiscount(price5, afternoon);
-        System.out.println("Starting price: " + price5 + ", after time discount (16:00): " + priceAfterTime2);
+    private static void testTimeDiscount() {
+        System.out.println("=== testTimeDiscount ===");
+        DiscountCalculator discountCalculator = new DiscountCalculator();
+        BigDecimal price = new BigDecimal(1000);
+        LocalDateTime morning = LocalDateTime.of(2025, 12, 8, 10, 0);
+        BigDecimal morningDiscount = discountCalculator.calculatePriceWithTimeDiscount(price, morning);
+        System.out.println("Time: " + morning.getHour() + " | Expected 5% discount: " + morningDiscount);
+        LocalDateTime afternoon = LocalDateTime.of(2025, 12, 8, 16, 0);
+        BigDecimal afternoonDiscount = discountCalculator.calculatePriceWithTimeDiscount(price, afternoon);
+        System.out.println("Time: " + afternoon.getHour() + " | Expected no discount: " + afternoonDiscount);
+        System.out.println();
     }
 }

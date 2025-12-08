@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 
 public class DiscountCalculator {
 
-    private static final BigDecimal DISCOUNT_10 = new BigDecimal("0.10");
-    private static final BigDecimal DISCOUNT_20 = new BigDecimal("0.20");
-    private static final BigDecimal DISCOUNT_5  = new BigDecimal("0.05");
+    private static final BigDecimal DISCOUNT_10 = new BigDecimal(0.10);
+    private static final BigDecimal DISCOUNT_20 = new BigDecimal(0.20);
+    private static final BigDecimal DISCOUNT_5  = new BigDecimal(0.05);
 
     public BigDecimal calculatePriceWithAmountDiscount(BigDecimal price) {
 
@@ -22,9 +22,7 @@ public class DiscountCalculator {
     }
 
     public BigDecimal calculatePriceWithTimeDiscount(BigDecimal price, LocalDateTime dateTime) {
-
         int hour = dateTime.getHour();
-
         if (hour < 15) {
             return price.subtract(price.multiply(DISCOUNT_5)).setScale(2, RoundingMode.HALF_UP);
         } else {

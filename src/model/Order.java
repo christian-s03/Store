@@ -21,6 +21,9 @@ public class Order {
         this.orderDateTime = ZonedDateTime.now(ZoneId.of("Europe/Warsaw"));
     }
 
+    public Order() {
+    }
+
     public int getOrderId() {
         return orderId;
     }

@@ -17,6 +17,9 @@ public class Cart {
         this.productManager = productManager;
     }
 
+    public Cart() {
+    }
+
     public void addProductToCart(Product product, int quantity) throws NotAvailableException {
         productManager.findById(product.getId()).ifPresentOrElse(foundProduct -> {
 

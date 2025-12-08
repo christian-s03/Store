@@ -10,29 +10,72 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class CartTest {
-
     public static void main(String[] args) throws NotAvailableException {
-        Product product1 = new Product(UUID.randomUUID(), "Laptop", new BigDecimal("6000"), 5);
-        ProductManager productManager = new ProductManager();
-        productManager.addProduct(product1);
+        testAddProductToCart();
+        testRemoveProductFromCart();
+        testTotalCartPrice();
+        testViewCartProducts();
+    }
 
-        Cart cart = new Cart(new ArrayList<>(), productManager);
+    private static void testAddProductToCart() throws NotAvailableException {
+        System.out.println("=== testAddProductToCart ===");
 
-        try {
-            cart.addProductToCart(product1, 1);
-        } catch (NotAvailableException e) {
-            System.out.println("Error adding product to cart: " + e.getMessage());
-        }
+        ProductManager pm = new ProductManager();
+        Product product = new Product(UUID.randomUUID(), "Mouse", new BigDecimal(100), 5);
+        pm.addProduct(product);
+        Cart cart = new Cart(new ArrayList<>(), pm);
+        cart.addProductToCart(product, 3);
 
-        System.out.println("\n=== View Cart ===");
+        System.out.println("Expected quantity in cart: 3");
+        System.out.println("Actual quantity: " + cart.getQuantityInCart(product));
+        System.out.println();
+    }
+
+    private static void testRemoveProductFromCart() throws NotAvailableException {
+        System.out.println("=== testRemoveProductFromCart ===");
+
+        ProductManager pm = new ProductManager();
+        Product product = new Product(UUID.randomUUID(), "Keyboard", new BigDecimal(150), 5);
+        pm.addProduct(product);
+
+        Cart cart = new Cart(new ArrayList<>(), pm);
+        cart.addProductToCart(product, 4);
+
+        cart.removeProductFromCart(product, 2);
+        System.out.println("Expected quantity in cart after removal: 2");
+        System.out.println("Actual quantity: " + cart.getQuantityInCart(product));
+        System.out.println();
+    }
+
+    private static void testTotalCartPrice() throws NotAvailableException {
+        System.out.println("=== testTotalCartPrice ===");
+
+        ProductManager pm = new ProductManager();
+        Product product1 = new Product(UUID.randomUUID(), "Monitor", new BigDecimal(5000), 10);
+        Product product2 = new Product(UUID.randomUUID(), "Headset", new BigDecimal(300), 10);
+        pm.addProduct(product1);
+        pm.addProduct(product2);
+
+        Cart cart = new Cart(new ArrayList<>(), pm);
+        cart.addProductToCart(product1, 2);
+        cart.addProductToCart(product2, 1);
+
+        BigDecimal total = cart.totalCartPrice();
+        System.out.println("Total price after discounts: " + total);
+        System.out.println();
+    }
+
+    private static void testViewCartProducts() throws NotAvailableException {
+        System.out.println("=== testViewCartProducts ===");
+
+        ProductManager pm = new ProductManager();
+        Product product = new Product(UUID.randomUUID(), "Laptop", new BigDecimal(7000), 5);
+        pm.addProduct(product);
+
+        Cart cart = new Cart(new ArrayList<>(), pm);
+        cart.addProductToCart(product, 1);
+
         cart.viewCartProducts();
-
-        System.out.println("\nQuantity of Laptop in cart: " + cart.getQuantityInCart(product1));
-
-        System.out.println("\n=== Remove Products ===");
-        cart.removeProductFromCart(product1, 1);
-
-        System.out.println("\n=== View Cart After Removal ===");
-        cart.viewCartProducts();
+        System.out.println();
     }
 }

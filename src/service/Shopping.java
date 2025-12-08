@@ -9,8 +9,8 @@ import java.time.ZoneId;
 import java.util.*;
 
 public class Shopping implements CommandLine {
-    private ProductManager productManager;
-    private Cart cart;
+    public ProductManager productManager;
+    public Cart cart;
     private OrderProcessor orderProcessor;
     private Scanner scanner;
     private PcComponents pcComponents;
