@@ -59,7 +59,6 @@ public class Shopping implements CommandLine {
 
     public void addProductToCart() {
         System.out.println("Please enter the product ID (UUID) that you want to add to cart: ");
-
         UUID productId;
         try {
             productId = UUID.fromString(scanner.nextLine());
